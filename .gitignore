@@ -1,0 +1,5 @@
+# Ignore Tmux Plugins (The manager will reinstall these)
+tmux/plugins/
+
+# Ignore other common junk (DS_Store is a Mac system file)
+.DS_Store

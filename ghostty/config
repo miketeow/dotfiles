@@ -1,0 +1,66 @@
+# Fonts
+font-size = 16
+font-family = "Geist Mono"
+font-feature = -liga
+cursor-style = block
+
+# Window
+window-padding-x = 12
+window-padding-y = 12
+window-position-x = 150
+window-position-y = 20
+macos-titlebar-style = hidden
+background-opacity = 0.8
+shell-integration-features = no-cursor
+resize-overlay = never
+window-height = 35
+window-width = 140
+window-colorspace = display-p3
+window-save-state = always
+window-padding-balance = true
+adjust-cell-height = 25%
+mouse-hide-while-typing = true
+mouse-scroll-multiplier = 2
+macos-non-native-fullscreen = true
+confirm-close-surface = false
+
+# Keybindings
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+keybind = cmd+h=previous_tab
+keybind = cmd+j=next_tab
+
+keybind = super+ctrl+h=resize_split:left,10
+keybind = super+ctrl+j=resize_split:down,10
+keybind = super+ctrl+k=resize_split:up,10
+keybind = super+ctrl+l=resize_split:right,10
+
+keybind = global:cmd+backquote=toggle_quick_terminal
+
+
+# Colors
+background = #161617
+foreground = #c9c7cd
+cursor-color = #757581
+
+# Palette
+palette = 0=#27272a
+palette = 1=#f5a191
+palette = 2=#90b99f
+palette = 3=#e6b99d
+palette = 4=#aca1cf
+palette = 5=#e29eca
+palette = 6=#ea83a5
+palette = 7=#c1c0d4
+
+palette = 8=#353539
+palette = 9=#ffae9f
+palette = 10=#9dc6ac
+palette = 11=#f0c5a9
+palette = 12=#b9aeda
+palette = 13=#ecaad6
+palette = 14=#f591b2
+palette = 15=#cac9dd

@@ -1,0 +1,90 @@
+# ~/.config/starship.toml
+
+# 1. Global Layout
+add_newline = true
+command_timeout = 1000
+
+# The Order:
+# Path -> Git -> Space -> C -> Rust -> Node -> Go -> LineBreak -> Prompt
+format = """
+$directory\
+$git_branch\
+$git_status\
+$c\
+$rust\
+$nodejs\
+$bun\
+$golang\
+$line_break\
+$character"""
+
+# 2. Directory (Professional Blue)
+[directory]
+style = "blue"
+truncation_length = 0   # Show full path (as you prefer)
+truncate_to_repo = false
+read_only = " [RO]"     # Text instead of lock icon
+
+# 3. Git Branch (Clean Gray)
+[git_branch]
+style = "fg:#6c6c6c"
+symbol = ""             # No icon
+format = " [$branch]($style)" # Leading space ensures separation
+
+# 4. Git Status (Detailed but Clean)
+[git_status]
+style = "fg:#6c6c6c"
+format = "([$all_status$ahead_behind]($style))"
+# Symbols: Standard dev shorthand
+conflicted = "!= "
+ahead = "⇡"       # Arrow up (Need to push)
+behind = "⇣"      # Arrow down (Need to pull)
+diverged = "⇕ "
+up_to_date = ""
+untracked = "?"   # New files
+stashed = "$"
+modified = "*"    # Changed files
+staged = "+"      # Ready to commit
+renamed = "»"
+deleted = "x"
+
+# 5. The Prompt Character
+[character]
+success_symbol = "[➤](magenta)"
+error_symbol = "[➤](red)"
+
+# --- LANGUAGES (Text-Based Styles) ---
+
+# C / C++
+[c]
+symbol = "c"
+style = "yellow bold"
+detect_extensions = ["c", "h", "cpp", "hpp"]
+# " via c v11.0"
+format = " via [$symbol $version]($style)"
+
+# Rust
+[rust]
+symbol = "rs"
+style = "red bold"
+# " via rs v1.75"
+format = " via [$symbol $version]($style)"
+
+# JavaScript / Node
+[nodejs]
+symbol = "node"
+style = "green bold"
+# " via node v20.0"
+format = " via [$symbol $version]($style)"
+
+# Bun (Since you mentioned using bunx)
+[bun]
+symbol = "bun"
+style = "green bold"
+format = " via [$symbol $version]($style)"
+
+# Go (Low Priority - kept simple)
+[golang]
+symbol = "go"
+style = "cyan bold"
+format = " via [$symbol $version]($style)"

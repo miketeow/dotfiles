@@ -1,0 +1,47 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "Workspace",
+    "use_key_equivalents": true,
+    "bindings": {
+      // "shift shift": "file_finder::Toggle"
+      "cmd-t": "workspace::ToggleBottomDock",
+      "cmd-b": "workspace::ToggleRightDock",
+      "cmd-alt-b": "workspace::ToggleLeftDock"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "use_key_equivalents": true,
+    "bindings": {
+      "shift-cmd-n": "project_panel::NewDirectory",
+      "cmd-e": "project_panel::ToggleFocus"
+    }
+  },
+  {
+    "context": "Editor",
+    "use_key_equivalents": true,
+    "bindings": {
+      "shift-cmd-[": "editor::Fold",
+      "shift-cmd-]": "editor::UnfoldLines"
+    }
+  },
+  {
+    "context": "Editor",
+    "use_key_equivalents": true,
+    "bindings": {
+      "shift-cmd-i": "editor::SelectEnclosingSymbol"
+    }
+  },
+  {
+    "bindings": {
+      "cmd-d": "editor::DuplicateSelection"
+    }
+  }
+]
