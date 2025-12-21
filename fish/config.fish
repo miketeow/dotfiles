@@ -7,6 +7,7 @@ if status is-interactive
     # 2. PATHS
     fish_add_path $HOME/.local/bin
     fish_add_path $HOME/go/bin
+    fish_add_path $HOME/.cargo/bin
     fish_add_path $HOME/Library/Python/3.9/bin
     fish_add_path /Users/mengkhaiteow/Programming/worldbanc/private/bin
     fish_add_path /opt/homebrew/opt/postgresql@16/bin
@@ -51,6 +52,7 @@ if status is-interactive
     alias c="clear"
     alias zconf="code ~/.config/fish/config.fish" # Quick edit alias
     alias reload="source ~/.config/fish/config.fish"
+    alias air='~/.air'
 
     # --- GIT ALIASES ---
     alias gs="git status"
