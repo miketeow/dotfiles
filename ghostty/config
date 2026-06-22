@@ -39,7 +39,7 @@ keybind = super+ctrl+k=resize_split:up,10
 keybind = super+ctrl+l=resize_split:right,10
 
 keybind = global:cmd+backquote=toggle_quick_terminal
-
+keybind = cmd+shift+f=toggle_window_float_on_top
 
 # Colors
 background = #161617

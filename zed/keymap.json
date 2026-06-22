@@ -1,47 +1,36 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
     "context": "Workspace",
     "use_key_equivalents": true,
     "bindings": {
-      // "shift shift": "file_finder::Toggle"
-      "cmd-t": "workspace::ToggleBottomDock",
-      "cmd-b": "workspace::ToggleRightDock",
-      "cmd-alt-b": "workspace::ToggleLeftDock"
-    }
+      "cmd-t": "terminal_panel::ToggleFocus",
+      "cmd-b": "project_panel::ToggleFocus",
+      "cmd-alt-b": "git_panel::ToggleFocus",
+      "cmd-shift-b": "workspace::CloseAllDocks",
+      "cmd-j": "project_symbols::Toggle",
+    },
   },
   {
     "context": "ProjectPanel",
     "use_key_equivalents": true,
     "bindings": {
       "shift-cmd-n": "project_panel::NewDirectory",
-      "cmd-e": "project_panel::ToggleFocus"
-    }
+      "cmd-e": "editor::ToggleFocus",
+      "cmd-b": "workspace::ToggleRightDock",
+    },
   },
   {
     "context": "Editor",
-    "use_key_equivalents": true,
     "bindings": {
-      "shift-cmd-[": "editor::Fold",
-      "shift-cmd-]": "editor::UnfoldLines"
-    }
+      "cmd-l": "editor::DuplicateLineDown",
+      "cmd-s cmd-l": "editor::SelectLine",
+    },
   },
   {
-    "context": "Editor",
-    "use_key_equivalents": true,
+    "context": "Terminal",
     "bindings": {
-      "shift-cmd-i": "editor::SelectEnclosingSymbol"
-    }
+      "cmd-e": "editor::ToggleFocus",
+      "cmd-t": "workspace::ToggleBottomDock",
+    },
   },
-  {
-    "bindings": {
-      "cmd-d": "editor::DuplicateSelection"
-    }
-  }
 ]

@@ -28,8 +28,8 @@ if status is-interactive
     alias c="clear"
 
     # Navigation & Maintenance
-    alias dot="code ~/dotfiles"
-    alias zconf="code ~/dotfiles/fish/config.fish"
+    alias dot="zed ~/dotfiles"
+    alias zconf="zed ~/dotfiles/fish/config.fish"
     # Added a nice confirmation message to reload
     alias reload="source ~/.config/fish/config.fish; echo 'Successfully reloaded fish config! 🚀'"
 
@@ -44,6 +44,7 @@ if status is-interactive
     # Git aliases
     alias gs="git status"
     alias ga="git add ."
+    alias gA="git add -A"  # Adds ALL changes across the entire monorepo
     alias gc="git commit -m"
     alias gp="git push"
     alias gl="git --no-pager log --oneline -n 15"
@@ -58,7 +59,10 @@ if status is-interactive
     alias gco="git checkout"
     alias gsw="git switch"
 
-    # Misc
-    alias air='~/.air'
+    alias ltcp="tree -I node_modules --dirsfirst | sed 's/\xc2\xa0/ /g' | pbcopy && echo 'Tree copied to clipboard! 🌲'"
 
 end
+
+# Added by OrbStack: command-line tools and integration
+# This won't be added again if you remove it.
+source ~/.orbstack/shell/init2.fish 2>/dev/null || :

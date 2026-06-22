@@ -7,6 +7,27 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always"
+          }
+        }
+      },
+      "enable_lsp_tasks": true
+    }
+  },
+  "cli_default_open_behavior": "new_window",
+  "git_panel": {
+    "dock": "left"
+  },
   "base_keymap": "VSCode",
   "ui_font_size": 16,
   "ui_font_family": "GeistMono Nerd Font",
@@ -15,7 +36,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "GitHub Dark Default"
+    "dark": "GitHub Dark Default",
   },
   "current_line_highlight": "gutter",
   "cursor_blink": false,
@@ -23,75 +44,88 @@
   "gutter": {
     "runnables": false,
     "breakpoints": false,
-    "folds": false
+    "folds": false,
   },
   "inline_code_actions": false,
   "tab_bar": {
-    "show": false
+    "show": false,
   },
   "toolbar": {
     "quick_actions": false,
     "selections_menu": false,
     "agent_review": false,
-    "breadcrumbs": true
+    "breadcrumbs": true,
   },
   "project_panel": {
+    "git_status_indicator": false,
+    "diagnostic_badges": true,
+    "bold_folder_labels": true,
     "dock": "right",
     "default_width": 380,
-    "git_status": false,
-    "show_diagnostics": "off",
-    "button": false
+    "git_status": true,
+    "show_diagnostics": "all",
+    "button": false,
   },
   "scrollbar": {
     "cursors": false,
     "git_diff": false,
     "selected_text": false,
     "selected_symbol": false,
-    "diagnostics": "error"
-  },
-  "features": {
-    "edit_prediction_provider": "zed"
+    "diagnostics": "error",
   },
   "edit_predictions": {
-    "mode": "eager"
+    "provider": "zed",
+    "mode": "eager",
   },
   "languages": {
     "Markdown": {
       "edit_predictions_disabled_in": ["string", "comment"],
-      "show_edit_predictions": false
-    }
+      "show_edit_predictions": false,
+      "show_completions_on_input": true,
+    },
+    "MDX": {
+      "show_completions_on_input": true,
+      "soft_wrap": "editor_width",
+    },
+    "CSS": {
+      "language_servers": [
+        "tailwindcss-intellisense-css",
+        "!vscode-css-language-server",
+        "...",
+      ],
+    },
   },
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "agent": {
-    "button": false
-  },
-  "notification_panel": {
-    "button": false
+    "dock": "right",
+    "button": false,
   },
   "debugger": {
-    "button": false
+    "button": false,
   },
   "terminal": {
     "button": false,
-    "default_height": 420
+    "default_height": 420,
   },
   "diagnostics": {
-    "button": false
+    "button": false,
   },
   "collaboration_panel": {
-    "button": false
+    "dock": "left",
+    "button": false,
   },
   "outline_panel": {
-    "button": false
+    "dock": "left",
+    "button": false,
   },
   "search": {
-    "button": false
+    "button": false,
   },
   "journal": {
-    "path": "/Users/mengkhaiteow/developer"
-  }
+    "path": "/Users/mengkhaiteow/developer",
+  },
 }

@@ -1,0 +1,17 @@
+{
+  "MDX File Component": {
+    "prefix": "file",
+    "body": ["<File>${1:filename}</File>$0"],
+    "description": "Insert Indigo <File> component for disk resources"
+  },
+  "MDX URL Component": {
+    "prefix": "url",
+    "body": ["<Url>${1:localhost:3000}</Url>$0"],
+    "description": "Insert Emerald <Url> component for network resources"
+  },
+  "MDX Code Block with Title": {
+    "prefix": "cbt",
+    "body": ["```${1:ts} title=\"${2:filename.ts}\"", "$0", "```"],
+    "description": "Insert code block with title metadata"
+  }
+}

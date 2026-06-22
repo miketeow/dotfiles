@@ -2,7 +2,7 @@
 
 # 1. Global Layout
 add_newline = true
-command_timeout = 1000
+command_timeout = 5000
 
 # The Order:
 # Path -> Git -> Space -> C -> Rust -> Node -> Go -> LineBreak -> Prompt
