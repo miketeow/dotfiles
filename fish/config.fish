@@ -21,7 +21,6 @@ if status is-interactive
     starship init fish | source
     zoxide init fish --cmd cd | source
     fnm env --use-on-cd --shell fish | source
-    direnv hook fish | source
 
     # 5. ALIASES
     alias vi="nvim"
