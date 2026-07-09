@@ -6,6 +6,7 @@ if status is-interactive
     set -gx JAVA_HOME (/usr/libexec/java_home -v 17)
     set -gx PNPM_HOME "$HOME/Library/pnpm"
     set -gx BUN_INSTALL "$HOME/.bun"
+    set -gx EDITOR "zed --wait"
 
     # 3. PATHS
     # fish_add_path is smart: it won't add the same path twice.
