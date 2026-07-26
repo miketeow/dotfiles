@@ -1,29 +1,64 @@
+# ~/dotfiles/fish/config.fish
+#
+# LAYOUT — two zones, and the split matters:
+#
+#   Top level      → environment + PATH. Runs for EVERY fish, including
+#                    non-interactive ones (`fish -c ...`, scripts, and GUI apps
+#                    like Zed that capture their environment from a fish subshell).
+#   is-interactive → prompt, aliases, and tooling that only makes sense at a
+#                    terminal you are typing into.
+#
+# Putting env vars behind the interactive guard is what caused Zed's Java language
+# server to see a different JDK than the terminal did. Keep exports out here.
+
+# ─── 1. HOMEBREW ──────────────────────────────────────────────────────────────
+# `brew shellenv fish` emits native fish (it already uses fish_add_path --global).
+# Guarded on HOMEBREW_PREFIX: child shells inherit it, so nested shells skip the
+# subprocess instead of prepending /opt/homebrew/bin to PATH over and over.
+if not set -q HOMEBREW_PREFIX
+    /opt/homebrew/bin/brew shellenv fish | source
+end
+
+# ─── 2. ENVIRONMENT ───────────────────────────────────────────────────────────
+# No hardcoded major version. /usr/libexec/java_home with no -v returns the newest
+# installed JDK, so this never drifts when you add or remove a JDK.
+# Guarded so a failed lookup leaves JAVA_HOME unset rather than set to "".
+set -l _java_home (/usr/libexec/java_home 2>/dev/null)
+if test -n "$_java_home"
+    set -gx JAVA_HOME $_java_home
+end
+
+set -gx PNPM_HOME "$HOME/Library/pnpm"
+set -gx BUN_INSTALL "$HOME/.bun"
+set -gx EDITOR "zed --wait"
+set -gx VISUAL $EDITOR
+
+# ─── 3. PATH ──────────────────────────────────────────────────────────────────
+# -g (global) is deliberate. Without it fish_add_path writes to the UNIVERSAL
+# variable fish_user_paths, which is persisted to ~/.config/fish/fish_variables
+# and survives edits to this file — deleting a line here would not remove the path.
+# With -g, PATH is derived from this file alone. Nonexistent dirs are skipped.
+fish_add_path -g $HOME/.local/bin
+fish_add_path -g $HOME/go/bin
+fish_add_path -g $HOME/.cargo/bin
+fish_add_path -g $HOME/Library/Python/3.9/bin
+fish_add_path -g /opt/homebrew/opt/postgresql@18/bin
+fish_add_path -g $BUN_INSTALL/bin
+fish_add_path -g $PNPM_HOME
+
+# ─── 4. INTERACTIVE ONLY ──────────────────────────────────────────────────────
 if status is-interactive
-    # 1. HOMEBREW (Essential)
-    eval (/opt/homebrew/bin/brew shellenv)
+    set -g fish_greeting ""
 
-    # 2. ENVIRONMENT VARIABLES (Set these before adding to PATH)
-    set -gx JAVA_HOME (/usr/libexec/java_home -v 17)
-    set -gx PNPM_HOME "$HOME/Library/pnpm"
-    set -gx BUN_INSTALL "$HOME/.bun"
-    set -gx EDITOR "zed --wait"
-
-    # 3. PATHS
-    # fish_add_path is smart: it won't add the same path twice.
-    fish_add_path $HOME/.local/bin
-    fish_add_path $HOME/go/bin
-    fish_add_path $HOME/.cargo/bin
-    fish_add_path $HOME/Library/Python/3.9/bin
-    fish_add_path /opt/homebrew/opt/postgresql@18/bin
-    fish_add_path $BUN_INSTALL/bin
-    fish_add_path $PNPM_HOME
-
-    # 4. TOOLS INITIALIZATION
+    # fnm stays here on purpose: `fnm env` creates a per-shell directory under
+    # ~/.local/state/fnm_multishells, so running it for every non-interactive
+    # shell would litter. Zed captures env from a login+interactive fish, so
+    # editor tooling still resolves node correctly.
     starship init fish | source
     zoxide init fish --cmd cd | source
     fnm env --use-on-cd --shell fish | source
 
-    # 5. ALIASES
+    # ─── ALIASES ───
     alias vi="nvim"
     alias vi-min="NVIM_APPNAME=minimalnvim nvim"
     alias c="clear"
@@ -31,8 +66,9 @@ if status is-interactive
     # Navigation & Maintenance
     alias dot="zed ~/dotfiles"
     alias zconf="zed ~/dotfiles/fish/config.fish"
-    # Added a nice confirmation message to reload
-    alias reload="source ~/.config/fish/config.fish; echo 'Successfully reloaded fish config! 🚀'"
+    # exec fish, not `source`: re-sourcing cannot undo an alias or PATH entry you
+    # just deleted, so it can leave stale state behind. exec gives a clean shell.
+    alias reload="echo 'Reloading fish config! 🚀'; exec fish"
 
     # Eza (ls) replacements
     alias ls="eza --icons=always --long --no-filesize --color=always --no-permissions --no-user --group-directories-first"
@@ -55,7 +91,7 @@ if status is-interactive
 
     # Git Pro Utils
     alias gun="git restore --staged ."
-    alias gnah="git reset --hard HEAD && git clean -fd"
+    alias gnah="git reset --hard HEAD && git clean -fd"  # DESTRUCTIVE: discards all uncommitted work
     alias gbr="git branch"
     alias gco="git checkout"
     alias gsw="git switch"

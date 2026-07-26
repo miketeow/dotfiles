@@ -22,6 +22,11 @@
         }
       },
       "enable_lsp_tasks": true
+    },
+    "jdtls": {
+      "settings": {
+        "java_home": "/Library/Java/JavaVirtualMachines/jdk-21.jdk/Contents/Home"
+      }
     }
   },
   "cli_default_open_behavior": "new_window",
