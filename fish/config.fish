@@ -62,6 +62,7 @@ if status is-interactive
     alias vi="nvim"
     alias vi-min="NVIM_APPNAME=minimalnvim nvim"
     alias c="clear"
+    alias cc="claude"
 
     # Navigation & Maintenance
     alias dot="zed ~/dotfiles"
