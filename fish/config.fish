@@ -13,11 +13,16 @@
 
 # ─── 1. HOMEBREW ──────────────────────────────────────────────────────────────
 # `brew shellenv fish` emits native fish (it already uses fish_add_path --global).
-# Guarded on HOMEBREW_PREFIX: child shells inherit it, so nested shells skip the
-# subprocess instead of prepending /opt/homebrew/bin to PATH over and over.
-if not set -q HOMEBREW_PREFIX
-    /opt/homebrew/bin/brew shellenv fish | source
-end
+#
+# Run it UNCONDITIONALLY. It used to be guarded on HOMEBREW_PREFIX to skip the
+# subprocess in child shells, but that guard was a correctness bug: macOS
+# /usr/libexec/path_helper runs in every LOGIN shell and re-hoists /usr/bin and
+# friends to the front of PATH, pushing /opt/homebrew/bin behind them. Only
+# `brew shellenv` puts Homebrew back in front. With the guard, a nested login
+# shell skipped that repair and silently resolved brew-vs-system collisions to
+# the system copy - which is why `python3` was Apple's 3.9 in subshells but
+# Homebrew's in a fresh terminal. The subprocess costs ~10ms. Not worth it.
+/opt/homebrew/bin/brew shellenv fish | source
 
 # ─── 2. ENVIRONMENT ───────────────────────────────────────────────────────────
 # No hardcoded major version. /usr/libexec/java_home with no -v returns the newest
@@ -41,7 +46,6 @@ set -gx VISUAL $EDITOR
 fish_add_path -g $HOME/.local/bin
 fish_add_path -g $HOME/go/bin
 fish_add_path -g $HOME/.cargo/bin
-fish_add_path -g $HOME/Library/Python/3.9/bin
 fish_add_path -g /opt/homebrew/opt/postgresql@18/bin
 fish_add_path -g $BUN_INSTALL/bin
 fish_add_path -g $PNPM_HOME
