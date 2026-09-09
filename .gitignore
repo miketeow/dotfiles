@@ -3,3 +3,7 @@ tmux/plugins/
 
 # Ignore other common junk (DS_Store is a Mac system file)
 .DS_Store
+
+# Zed prompt library (generated LMDB; binary, unmergeable, and empty).
+# Zed recreates it on launch. Export prompts as text if you ever want them versioned.
+zed/prompts/
