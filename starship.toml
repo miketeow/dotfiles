@@ -2,7 +2,8 @@
 
 # 1. Global Layout
 add_newline = true
-command_timeout = 5000
+command_timeout = 5000   # max ms for external commands (git, etc.)
+scan_timeout = 50        # max ms to scan cwd for language/tool files (default 30)
 
 # The Order:
 # Path -> Git -> Space -> C -> Rust -> Node -> Go -> LineBreak -> Prompt
