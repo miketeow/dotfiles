@@ -43,6 +43,16 @@
     "light": "One Light",
     "dark": "GitHub Dark Default",
   },
+  "theme_overrides": {
+    "One Light": {
+      "search.match_background": "#ffb70099",
+      "search.active_match_background": "#ff6d00ff",
+    },
+    "GitHub Dark Default": {
+      "search.match_background": "#ffd23366",
+      "search.active_match_background": "#ff8c00e0",
+    },
+  },
   "current_line_highlight": "gutter",
   "cursor_blink": false,
   "cursor_shape": "block",
