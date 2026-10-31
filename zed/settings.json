@@ -34,9 +34,9 @@
     "dock": "left"
   },
   "base_keymap": "VSCode",
-  "ui_font_size": 16,
+  "ui_font_size": 16.0,
   "ui_font_family": "GeistMono Nerd Font",
-  "buffer_font_size": 15,
+  "buffer_font_size": 16.0,
   "buffer_font_family": "GeistMono Nerd Font",
   "theme": {
     "mode": "system",
@@ -123,6 +123,7 @@
     "button": false,
   },
   "terminal": {
+    "font_size": 16.0,
     "button": false,
     "default_height": 420,
   },
