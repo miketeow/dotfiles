@@ -63,8 +63,6 @@ if status is-interactive
     fnm env --use-on-cd --shell fish | source
 
     # ─── ALIASES ───
-    alias vi="nvim"
-    alias vi-min="NVIM_APPNAME=minimalnvim nvim"
     alias c="clear"
     alias cc="claude"
 
@@ -102,17 +100,6 @@ if status is-interactive
     alias gsw="git switch"
 
     alias ltcp="tree -I node_modules --dirsfirst | sed 's/\xc2\xa0/ /g' | pbcopy && echo 'Tree copied to clipboard! 🌲'"
-
-    # Herdr (terminal workspace manager)
-    # `hd` launches the persistent session, or reattaches if it is already running.
-    # There is no "detach" alias on purpose: detaching leaves the server and all
-    # panes running and is a keybinding inside the app (prefix+q, i.e. Ctrl-S q),
-    # not a shell command. `hdstop` is the hard shutdown — it kills the headless
-    # server and every pane process under it, so reach for it rarely.
-    alias hd="herdr"
-    alias hds="herdr status"
-    alias hdl="herdr session list"
-    alias hdstop="herdr server stop"
 
 end
 
