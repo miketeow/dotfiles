@@ -37,6 +37,8 @@ set -gx PNPM_HOME "$HOME/Library/pnpm"
 set -gx BUN_INSTALL "$HOME/.bun"
 set -gx EDITOR "zed --wait"
 set -gx VISUAL $EDITOR
+# Hide brew's "Adjust how often this is run..." hint. Changes no brew behaviour.
+set -gx HOMEBREW_NO_ENV_HINTS 1
 
 # ─── 3. PATH ──────────────────────────────────────────────────────────────────
 # -g (global) is deliberate. Without it fish_add_path writes to the UNIVERSAL
