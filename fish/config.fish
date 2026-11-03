@@ -21,8 +21,17 @@
 # `brew shellenv` puts Homebrew back in front. With the guard, a nested login
 # shell skipped that repair and silently resolved brew-vs-system collisions to
 # the system copy - which is why `python3` was Apple's 3.9 in subshells but
-# Homebrew's in a fresh terminal. The subprocess costs ~10ms. Not worth it.
-/opt/homebrew/bin/brew shellenv fish | source
+# Homebrew's in a fresh terminal.
+#
+# The lines below are the output of `brew shellenv fish`, inlined: the brew
+# subprocess cost ~20ms, a third of startup. They still run unconditionally.
+# If a brew upgrade changes that output, re-paste it here.
+set --global --export HOMEBREW_PREFIX "/opt/homebrew"
+set --global --export HOMEBREW_CELLAR "/opt/homebrew/Cellar"
+set --global --export HOMEBREW_REPOSITORY "/opt/homebrew"
+fish_add_path --global --move --path "/opt/homebrew/bin" "/opt/homebrew/sbin"
+if test -n "$MANPATH"; set --global --export MANPATH (string replace --regex '^:*(.*?):*$' ':$1' -- "$MANPATH"); end
+if not set --query INFOPATH; set INFOPATH ''; end; set --global --export INFOPATH "/opt/homebrew/share/info" $INFOPATH
 
 # ─── 2. ENVIRONMENT ───────────────────────────────────────────────────────────
 # No hardcoded major version. /usr/libexec/java_home with no -v returns the newest
@@ -60,7 +69,8 @@ if status is-interactive
     # ~/.local/state/fnm_multishells, so running it for every non-interactive
     # shell would litter. Zed captures env from a login+interactive fish, so
     # editor tooling still resolves node correctly.
-    starship init fish | source
+    # --print-full-init: the short form spawns starship twice plus a psub temp file.
+    starship init fish --print-full-init | source
     zoxide init fish --cmd cd | source
     fnm env --use-on-cd --shell fish | source
 
